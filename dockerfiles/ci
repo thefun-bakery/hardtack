@@ -1,0 +1,30 @@
+#from centos:8
+#
+#run yum install -y ruby.x86_64 ruby-devel.x86_64 mysql.x86_64 redis.x86_64
+#run yum install -y zlib zlib-devel gcc-c++ patch readline readline-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison curl sqlite-devel redhat-rpm-config
+#
+## for only test. run mysqld
+#run yum install -y mysql-server.x86_64
+#run systemctl enable mysqld
+#
+## prepare app
+#copy hardtack /hardtack
+#workdir /hardtack
+#run gem install rails bundler; bundle install
+
+
+
+from ruby:2.6.5
+
+# for only ci.
+run apt-get update; apt-get install -y mariadb-client mariadb-server
+
+copy hardtack /hardtack
+
+workdir /hardtack
+
+run gem install rails; bundle install
+
+copy libexec/entry_point_ci.sh /hardtack/entry_point.sh
+
+cmd /hardtack/entry_point.sh

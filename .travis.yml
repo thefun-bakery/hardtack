@@ -1,0 +1,6 @@
+language: ruby
+services:
+  - docker
+
+before_install:
+  - bin/docker_build_ci.sh
