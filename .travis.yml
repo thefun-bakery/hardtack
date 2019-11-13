@@ -2,5 +2,17 @@ language: ruby
 services:
   - docker
 
-before_install:
+install:
   - bin/docker_build_ci.sh
+  - bin/docker_run_ci.sh
+
+script:
+  - docker exec hardtack-ci /bin/sh -c "cd /hardtack; bundle exec rake test"
+
+
+# https://docs.travis-ci.com/user/job-lifecycle/
+#after_script:
+#  - bin/docker_build.sh
+#
+#deploy:
+#  - 

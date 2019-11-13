@@ -1,0 +1,13 @@
+from ruby:2.6.5
+
+run apt-get update; apt-get install -y supervisor redis
+
+copy assets/supervisor_redis.conf /etc/supervisor/conf.d/
+
+
+copy hardtack /hardtack
+workdir /hardtack
+run gem install rails; bundle install
+copy libexec/entry_point.sh /hardtack/entry_point.sh
+
+cmd /hardtack/entry_point.sh

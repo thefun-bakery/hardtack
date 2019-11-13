@@ -1,1 +1,3 @@
-docker build --rm --no-cache -t hardtack .
+cd $(dirname -- "$0")
+
+docker build --rm --no-cache -t hardtack -f ../dockerfiles/real ..
