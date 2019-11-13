@@ -2,17 +2,23 @@ language: ruby
 services:
   - docker
 
-install:
-  - bin/docker_build_ci.sh
-  - bin/docker_run_ci.sh
+jobs:
+  include:
 
-script:
-  - docker exec hardtack-ci /bin/sh -c "cd /hardtack; bundle exec rake test"
+    - stage: test
+      if: branch = develop
+      install:
+        - bin/docker_build_ci.sh
+        - bin/docker_run_ci.sh
+      script:
+        - docker exec hardtack-ci /bin/sh -c "bundle exec rake test"
 
-
-# https://docs.travis-ci.com/user/job-lifecycle/
-#after_script:
-#  - bin/docker_build.sh
-#
-#deploy:
-#  - 
+    - stage: deploy
+      if: branch = master
+      install:
+        - bin/docker_build.sh
+      script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker images
+        - docker tag hardtack $DOCKER_USERNAME/hardtack
+        - docker push $DOCKER_USERNAME/hardtack
