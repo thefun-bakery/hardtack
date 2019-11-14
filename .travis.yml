@@ -11,7 +11,7 @@ jobs:
         - bin/docker_build_ci.sh
         - bin/docker_run_ci.sh
       script:
-        - docker exec hardtack-ci /bin/sh -c "bundle exec rake test"
+        - docker exec -e RAILS_MASTER_KEY=$RAILS_MASTER_KEY hardtack-ci /bin/sh -c "bundle exec rake test --trace"
 
     - stage: deploy
       if: branch = master

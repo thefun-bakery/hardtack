@@ -1,4 +1,5 @@
 *.swp
 *.swo
 */log/*
-*/config/master.key
+hardtack/config/master.key
+hardtack/tmp/*
