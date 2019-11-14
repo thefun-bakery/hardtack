@@ -49,6 +49,8 @@ test:
 #
 production:
   <<: *default
-  database: hardtack_production
-  username: hardtack
-  password: <%= ENV['HARDTACK_DATABASE_PASSWORD'] %>
+  host:     <%= Rails.application.credentials.mysql[:host] %>
+  port:     <%= Rails.application.credentials.mysql[:port] %>
+  username: <%= Rails.application.credentials.mysql[:username] %>
+  password: <%= Rails.application.credentials.mysql[:password] %>
+  database: <%= Rails.application.credentials.mysql[:database] %>
