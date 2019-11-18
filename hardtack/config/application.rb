@@ -37,7 +37,7 @@ module Hardtack
     config.autoload_paths += %W(#{config.root}/lib)
     config.cache_store = :redis_cache_store,
       {
-        url: %w(#{Rails.application.credentials.redis[:servers]}),
+        url: ["#{Rails.application.credentials.redis[:servers]}"],
         driver: :hiredis
       }
   end

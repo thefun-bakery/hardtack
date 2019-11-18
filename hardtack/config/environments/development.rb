@@ -26,7 +26,7 @@ Rails.application.configure do
 #  end
   config.cache_store = :redis_cache_store,
     {
-    url: %w( redis://127.0.0.1:6379/0 ),
+      url: %w( redis://127.0.0.1:6379/0 ),
       driver: :hiredis
     }
 
