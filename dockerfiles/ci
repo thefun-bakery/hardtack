@@ -21,6 +21,9 @@ run apt-get update; apt-get install -y supervisor redis
 # for only ci. install mysql
 run apt-get update; apt-get install -y mariadb-client mariadb-server
 
+# for debug
+run apt-get update; apt-get install -y vim
+
 # for only ci. init mysql
 copy libexec/init_mysql.sh /tmp/init_mysql.sh
 run /tmp/init_mysql.sh; /bin/rm -f /tmp/init_mysql.sh
@@ -30,9 +33,9 @@ copy assets/supervisor_mysql.conf /etc/supervisor/conf.d/
 copy assets/supervisor_redis.conf /etc/supervisor/conf.d/
 
 
+copy libexec/entry_point.sh /hardtack/entry_point.sh
 copy hardtack /hardtack
 workdir /hardtack
 run gem install rails; bundle install
-copy libexec/entry_point.sh /hardtack/entry_point.sh
 
 cmd /hardtack/entry_point.sh

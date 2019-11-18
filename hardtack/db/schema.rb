@@ -13,8 +13,12 @@
 ActiveRecord::Schema.define(version: 2019_11_11_174207) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "nickname", null: false
+    t.string "service", null: false
+    t.string "identifier", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["service", "identifier"], name: "index_users_on_service_and_identifier", unique: true
   end
 
 end

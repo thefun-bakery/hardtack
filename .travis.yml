@@ -1,3 +1,6 @@
+notifications:
+  slack: thefun-bakery:Alwb2C0qUMp9wl3Xiipgbuzg
+
 language: ruby
 services:
   - docker
