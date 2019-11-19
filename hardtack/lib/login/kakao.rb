@@ -1,6 +1,7 @@
 require 'rest-client'
 require 'json'
 
+require 'encryption'
 require 'login/services'
 require 'login/hardtack_auth'
 require 'error/bad_request_error'
@@ -59,10 +60,9 @@ module Login
         {nickname: nickname, service: Login::Services::KAKAO, identifier: id}
       ) if user.nil?
 
-      access_token = Login::HardtackAuth.encrypt(user.id.to_s)
-      #Rails.cache.write("session:#{access_token}", user.id, expires_in: 12.hours)
+      access_token = Encryption.encrypt(user.id.to_s)
       cache_key = Login::HardtackAuth.cache_key(access_token)
-      Rails.cache.write(cache_key, user.id, expires_in: 5.minutes)
+      Rails.cache.write(cache_key, user.id, expires_in: 3.days)
       access_token
     end
   end

@@ -1,0 +1,13 @@
+default: &default
+  access_token:
+    expires_in: 3.days
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  
+
+production:
+  <<: *default

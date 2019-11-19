@@ -40,5 +40,7 @@ module Hardtack
         url: ["#{Rails.application.credentials.redis[:servers]}"],
         driver: :hiredis
       }
+
+    config.hardtack = config_for(:hardtack)
   end
 end

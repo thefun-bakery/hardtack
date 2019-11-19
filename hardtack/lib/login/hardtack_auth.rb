@@ -1,7 +1,5 @@
 module Login
   module HardtackAuth
-    KEY = Rails.application.credentials.hardtack[:auth][:key]
-
     def self.hardtack_access_token_from(authorization_header)
       authorization_header.sub("Bearer ", "")
     end
@@ -13,10 +11,6 @@ module Login
     def self.is_valid_authorization_header?(authorization_header)
       hardtack_access_token = hardtack_access_token_from(authorization_header)
       is_login?(hardtack_access_token)
-    end
-
-    def self.encrypt(value)
-      AES.encrypt(value, KEY)
     end
 
     def self.is_login?(hardtack_access_token)

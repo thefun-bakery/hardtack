@@ -1,4 +1,5 @@
 require 'error/base_error'
+require 'error/helpers/render'
 
 module Error
   module ErrorHandler
@@ -16,7 +17,7 @@ module Error
     private
 
     def respond(_error, _status, _message)
-      json = Helpers::Render.json(_error, _status, _message)
+      json = Error::Helpers::Render.json(_error, _status, _message)
       render json: json, status: _status
     end
   end
