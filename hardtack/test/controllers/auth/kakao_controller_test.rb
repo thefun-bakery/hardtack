@@ -1,7 +1,8 @@
 require 'test_helper'
 
-class V1::UserControllerTest < ActionDispatch::IntegrationTest
+class Auth::KakaoControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
 end
+
