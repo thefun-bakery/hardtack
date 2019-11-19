@@ -1,3 +1,5 @@
+require 'error/base_error'
+
 module Error
   module ErrorHandler
     def self.included(clazz)
@@ -5,7 +7,7 @@ module Error
         rescue_from ActiveRecord::RecordNotFound do |e|
           respond(:record_not_found, 404, e.to_s)
         end
-        rescue_from BaseError do |e|
+        rescue_from ::Error::BaseError do |e|
           respond(e.error, e.status, e.message.to_s)
         end
       end
