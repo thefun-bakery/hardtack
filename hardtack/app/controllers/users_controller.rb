@@ -3,7 +3,10 @@ require 'error/user_notfound_error'
 
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
+
   before_action :validate_authentication, only: [:me, :update_me]
+  before_action :set_user_by_header, only: [:me, :update_me]
+
 
   # GET /users
   def index
@@ -44,21 +47,27 @@ class UsersController < ApplicationController
 
   # GET /users/me
   def me
-    hardtack_access_token = Login::HardtackAuth.hardtack_access_token_from(authorization_header)
-    id = Encryption.decrypt(hardtack_access_token)
-    user = User.find_by_id(id)
-    raise Error::UserNotfoundError if user.nil?
-    render json: user
+    render json: @user
   end
 
   # POST /users/me
   def update_me
+    update
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def set_user_by_header
+      hardtack_access_token = Login::HardtackAuth.hardtack_access_token_from(
+        authorization_header
+      )
+      id = Encryption.decrypt(hardtack_access_token)
+      @user = User.find_by_id(id)
+      raise Error::UserNotfoundError if @user.nil?
     end
 
     # Only allow a trusted parameter "white list" through.

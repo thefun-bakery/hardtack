@@ -35,4 +35,21 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 204
   end
+
+  test "should show me" do
+    auth_header = login(@user)
+    get users_me_url(@user), headers: {Authorization: auth_header}, as: :json
+    assert_response :success
+  end
+
+  test "should update me" do
+    auth_header = login(@user)
+    patch(
+      users_me_url(@user),
+      params: { user: { nickname: 'updated_nick'} },
+      headers: {Authorization: auth_header},
+      as: :json
+    )
+    assert_response :success
+  end
 end
