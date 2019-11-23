@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_11_174207) do
+ActiveRecord::Schema.define(version: 2019_11_23_061357) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "nickname", null: false
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2019_11_11_174207) do
     t.string "identifier", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "profile_image_url", default: "https://thefun-bakery.s3.ap-northeast-2.amazonaws.com/hardtack/images/fairy-tales-4057425_640.jpg", null: false
     t.index ["service", "identifier"], name: "index_users_on_service_and_identifier", unique: true
   end
 
