@@ -1,7 +1,4 @@
-require 'encryption'
-require 'error/user_notfound_error'
-
-class UsersController < ApplicationController
+class V1::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
   before_action :validate_authentication, only: [:me, :update_me]
@@ -15,42 +12,42 @@ class UsersController < ApplicationController
     render json: @users
   end
 
-  # GET /users/1
+  # GET /v1/users/1
   def show
-    render json: @user
+    render json: api_response(@user)
   end
 
-  # POST /users
+  # POST /v1/users
   def create
     @user = User.new(user_params)
 
     if @user.save
-      render json: @user, status: :created, location: @user
+      render json: api_response(@user), status: :created, location: v1_user_url(@user)
     else
       render json: @user.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /users/1
+  # PATCH/PUT /v1/users/1
   def update
     if @user.update(user_params)
-      render json: @user
+      render json: api_response(@user)
     else
       render json: @user.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /users/1
+  # DELETE /v1/users/1
   def destroy
     @user.destroy
   end
 
-  # GET /users/me
+  # GET /v1/users/me
   def me
-    render json: @user
+    render json: api_response(@user)
   end
 
-  # POST /users/me
+  # POST /v1/users/me
   def update_me
     update
   end
@@ -61,18 +58,13 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
-    def set_user_by_header
-      hardtack_access_token = Login::HardtackAuth.hardtack_access_token_from(
-        authorization_header
-      )
-      id = Encryption.decrypt(hardtack_access_token)
-      @user = User.find_by_id(id)
-      raise Error::UserNotfoundError if @user.nil?
-    end
-
     # Only allow a trusted parameter "white list" through.
     def user_params
       #params.fetch(:user, {})
       params.require(:user).permit!
+    end
+
+    def api_response(user)
+      user.to_json( :only => [:nickname, :profile_image_url])
     end
 end

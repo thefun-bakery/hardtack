@@ -1,3 +1,4 @@
+require 'login'
 require 'login/kakao'
 
 class Auth::KakaoController < ApplicationController
@@ -10,7 +11,7 @@ class Auth::KakaoController < ApplicationController
 
   def login
     kakao_access_token = request.headers['Authorization']
-    access_token = Login::Kakao.login(kakao_access_token)
+    access_token = Login.login_by_kakao(kakao_access_token)
     render json: {access_token: access_token}
   end
 end

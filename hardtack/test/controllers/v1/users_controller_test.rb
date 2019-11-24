@@ -1,36 +1,36 @@
 require 'test_helper'
 
-class UsersControllerTest < ActionDispatch::IntegrationTest
+class V1::UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
   end
 
   test "should get index" do
-    get users_url, as: :json
+    get v1_users_url, as: :json
     assert_response :success
   end
 
   test "should create user" do
     assert_difference('User.count') do
-      post users_url, params: { user: { nickname: 'sammy', service: 'kakao', identifier: 100 } }, as: :json
+      post v1_users_url, params: { user: { nickname: 'sammy', service: 'kakao', identifier: 100 } }, as: :json
     end
 
     assert_response 201
   end
 
   test "should show user" do
-    get user_url(@user), as: :json
+    get v1_user_url(@user), as: :json
     assert_response :success
   end
 
   test "should update user" do
-    patch user_url(@user), params: { user: { nickname: 'updated_nick', service: 'kakao', identifier: 100  } }, as: :json
+    patch v1_user_url(@user), params: { user: { nickname: 'updated_nick', service: 'kakao', identifier: 100  } }, as: :json
     assert_response 200
   end
 
   test "should destroy user" do
     assert_difference('User.count', -1) do
-      delete user_url(@user), as: :json
+      delete v1_user_url(@user), as: :json
     end
 
     assert_response 204
@@ -38,14 +38,14 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should show me" do
     auth_header = login(@user)
-    get users_me_url(@user), headers: {Authorization: auth_header}, as: :json
+    get v1_users_me_url(@user), headers: {Authorization: auth_header}, as: :json
     assert_response :success
   end
 
   test "should update me" do
     auth_header = login(@user)
     patch(
-      users_me_url(@user),
+      v1_users_me_url(@user),
       params: { user: { nickname: 'updated_nick'} },
       headers: {Authorization: auth_header},
       as: :json
