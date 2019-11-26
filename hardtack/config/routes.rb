@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     patch 'users/me', to: 'users#update_me'
     # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
     resources :users
+
+    resources :files, only: [:show, :new], param: :filename
   end
 
   get '/404', to: 'errors#not_found'

@@ -2,6 +2,7 @@ require 'rest-client'
 require 'json'
 
 require 'error/bad_request_error'
+require 'error/unauthorized_error'
 
 module Login::Kakao
   REDIRECT_URI = Rails.application.credentials.hardtack[:auth][:kakao][:redirect_uri]
@@ -30,8 +31,7 @@ module Login::Kakao
                             headers={Authorization: access_token}
                            )
     rescue => e
-      raise Error::BadRequestError, 'invalid access-token' if e.http_code == 401
-      raise e
+      raise Error::UnauthorizedError if e.http_code == 401
     end
 
     json_res = JSON.parse(res.body)

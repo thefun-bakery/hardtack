@@ -1,6 +1,9 @@
+require 'error/bad_request_error'
+
 module Login
   module HardtackAuth
     def self.hardtack_access_token_from(authorization_header)
+      raise Error::BadRequestError, 'Authorization header is nil' if authorization_header.nil? or authorization_header.empty?
       authorization_header.sub("Bearer ", "")
     end
 
