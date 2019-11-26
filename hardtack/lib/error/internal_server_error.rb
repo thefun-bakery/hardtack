@@ -1,3 +1,5 @@
+require 'error/base_error'
+
 module Error
   class InternalServerError < BaseError
     def initialize(_message)
