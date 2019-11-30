@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_23_075953) do
+ActiveRecord::Schema.define(version: 2019_11_30_075954) do
 
-  create_table "homes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "users_id"
+    t.string "name", null: false
+    t.boolean "upload_complete", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_files_on_name", unique: true
+    t.index ["users_id"], name: "index_files_on_users_id"
+  end
+
+  create_table "homes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "users_id"
     t.string "name", default: "my home", null: false
     t.integer "bgcolor", default: 0, null: false
@@ -21,10 +31,11 @@ ActiveRecord::Schema.define(version: 2019_11_23_075953) do
     t.index ["users_id"], name: "index_homes_on_users_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "nickname", null: false
     t.string "service", limit: 10, null: false
     t.string "identifier", null: false
+    t.string "profile_image_filename"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "profile_image_url", default: "https://thefun-bakery.s3.ap-northeast-2.amazonaws.com/hardtack/images/fairy-tales-4057425_640.jpg", null: false

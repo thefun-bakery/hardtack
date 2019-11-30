@@ -1,40 +1,30 @@
-require 'fog'
+require 'hardtack_file_helper'
 
 class V1::FilesController < ApplicationController
-  before_action :validate_authentication, only: [:new, :show]
-  before_action :set_user_by_header, only: [:new, :show]
-  before_action :set_home_by_users_id, only: [:new, :show]
+  before_action :validate_authentication, only: [:prepare_upload, :show]
+  before_action :set_user_by_header, only: [:prepare_upload]
+  before_action :set_home_by_users_id, only: [:prepare_upload]
 
-  TIME_TO_ACCESS        = 2.seconds
-  AWS_ACCESS_KEY_ID     = Rails.application.credentials.aws[:access_key_id]
-  AWS_SECRET_ACCESS_KEY = Rails.application.credentials.aws[:secret_access_key]
-  REGION                = Rails.application.credentials.aws[:region]
-  #BUCKET                = Rails.application.credentials.aws[:bucket]
-  BUCKET                = 'temp'
 
   # GET /v1/files?filename=xxx
   def show
-    download_url = client.get_object_url(
-      BUCKET,
-      params.fetch(:filename),
-      TIME_TO_ACCESS.from_now.to_i
-    )
+    filename = get_filename_from_params(params)
+    url = HardtackFileHelper.get_download_url(filename)
+    Rails.logger.debug(url)
 
     render json: {
-      download_url: download_url
+      url: url
     }
   end
 
   # POST /v1/files
-  def new
-    upload_url = client.put_object_url(
-      BUCKET,
-      params.fetch(:filename),
-      TIME_TO_ACCESS.from_now.to_i
-    )
+  def prepare_upload
+    filename, url = HardtackFileHelper.prepare_upload(@user)
+    Rails.logger.debug(url)
 
     render json: {
-      upload_url: upload_url
+      file_name: filename,
+      url: url
     }
   end
 
@@ -45,12 +35,21 @@ class V1::FilesController < ApplicationController
       @home = Home.find_by_users_id(@user.id)
     end
 
-    def client
-      @client ||= Fog::Storage::AWS.new({
-        aws_access_key_id: AWS_ACCESS_KEY_ID,
-        aws_secret_access_key: AWS_SECRET_ACCESS_KEY,
-        region: REGION 
-      })
+    def file_params
+      params.fetch(:file, {}).permit(:name, :upload_complete)
+    end
+
+    def get_filename_from_params(params)
+      case params.has_key? :format
+      when true
+        "#{params.fetch(:filename)}.#{params.fetch(:format)}" 
+      when false
+        "#{params.fetch(:filename)}"
+      end
+    end
+
+    def api_response(file)
+      file.to_json( :only => [:name])
     end
 end
 

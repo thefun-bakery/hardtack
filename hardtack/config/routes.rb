@@ -9,7 +9,8 @@ Rails.application.routes.draw do
     # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
     resources :users
 
-    resources :files, only: [:show, :new], param: :filename
+    get   'files/prepare-upload', to: 'files#prepare_upload'
+    resources :files, only: [:show], param: :filename
   end
 
   get '/404', to: 'errors#not_found'
