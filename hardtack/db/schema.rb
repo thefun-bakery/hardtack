@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 2019_11_30_075954) do
     t.string "profile_image_filename"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "profile_image_url", default: "https://thefun-bakery.s3.ap-northeast-2.amazonaws.com/hardtack/images/fairy-tales-4057425_640.jpg", null: false
     t.index ["service", "identifier"], name: "index_users_on_service_and_identifier", unique: true
   end
 

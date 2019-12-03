@@ -6,12 +6,12 @@
 #
 one:
   nickname: 'nick1'
-  profile_image_url: 'http://a.b.c/img1.jpg'
+  profile_image_filename: 'filename1'
   service: 'kakao'
   identifier: 1
 
 two:
   nickname: 'nick2'
-  profile_image_url: 'http://a.b.c/img1.jpg'
+  profile_image_filename: 'filename2'
   service: 'kakao'
   identifier: 2

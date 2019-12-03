@@ -23,7 +23,7 @@ class V1::FilesController < ApplicationController
     Rails.logger.debug(url)
 
     render json: {
-      file_name: filename,
+      filename: filename,
       url: url
     }
   end

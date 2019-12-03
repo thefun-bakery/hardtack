@@ -13,6 +13,8 @@ module HardtackFileHelper
   KEY                   = Rails.application.credentials.hardtack[:auth][:key]
   PATH_PREFIX           = 'hardtack/images'
 
+  DEFAULT_PROFILE_IMAGE_URL = 'https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/fairy-tales-4057425_640.jpg'
+
 
   def self.client
     Fog::Storage.new(
@@ -41,6 +43,12 @@ module HardtackFileHelper
       path(filename),
       EXPIRE_TIME_DOWNLOAD.from_now.to_i
     )
+  end
+
+  def self.get_profile_image_url(filename)
+    filename.nil? ?
+      DEFAULT_PROFILE_IMAGE_URL :
+      self.get_download_url(filename)
   end
 
   def self.path(filename)

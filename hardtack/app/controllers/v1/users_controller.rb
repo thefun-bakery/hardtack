@@ -1,3 +1,6 @@
+require 'hardtack_file_helper'
+require 'json'
+
 class V1::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
@@ -65,6 +68,10 @@ class V1::UsersController < ApplicationController
     end
 
     def api_response(user)
-      user.to_json( :only => [:nickname, :profile_image_url])
+      response = JSON.parse(user.to_json( :only => [:nickname]))
+      response['profile_image_url'] = HardtackFileHelper.get_profile_image_url(
+        user.profile_image_filename
+      )
+      response.to_json
     end
 end
