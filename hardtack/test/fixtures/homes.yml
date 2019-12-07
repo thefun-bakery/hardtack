@@ -7,9 +7,9 @@
 one:
   users_id: 1
   name: 'home1'
-  bgcolor: 0
+  bgcolor: '000000'
 
 two:
   users_id: 1
   name: 'home1'
-  bgcolor: 0
+  bgcolor: '000000'

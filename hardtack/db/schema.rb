@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2019_11_30_075954) do
   create_table "homes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "users_id"
     t.string "name", default: "my home", null: false
-    t.integer "bgcolor", default: 0, null: false
+    t.string "bgcolor", default: "000000", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["users_id"], name: "index_homes_on_users_id"
