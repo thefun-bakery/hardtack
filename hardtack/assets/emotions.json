@@ -1,0 +1,232 @@
+{
+  "category": [
+    {
+      "tag": "안아줘",
+      "code": "hug",
+      "subcategory": [
+        {
+          "tag": "안아줘",
+          "code": "hug"
+        }
+      ]
+    },
+    {
+      "tag": "두려움",
+      "code": "fear",
+      "subcategory": [
+        {
+          "tag": "걱정",
+          "code": "worry"
+        },
+        {
+          "tag": "긴장",
+          "code": "tension"
+        },
+        {
+          "tag": "놀람",
+          "code": "fright"
+        },
+        {
+          "tag": "당황",
+          "code": "flustration"
+        },
+        {
+          "tag": "두려움",
+          "code": "fear"
+        },
+        {
+          "tag": "불안",
+          "code": "anxiety"
+        },
+        {
+          "tag": "혼란",
+          "code": "confusion"
+        }
+      ]
+    },
+    {
+      "tag": "불쾌",
+      "code": "displeasure",
+      "subcategory": [
+        {
+          "tag": "귀찮",
+          "code": "peskiness"
+        },
+        {
+          "tag": "노관심",
+          "code": "indifference"
+        },
+        {
+          "tag": "부끄부끄해",
+          "code": "shyness"
+        },
+        {
+          "tag": "싸늘하다",
+          "code": "coldness"
+        },
+        {
+          "tag": "지루해",
+          "code": "boredom"
+        },
+        {
+          "tag": "피곤",
+          "code": "fatigue"
+        }
+      ]
+    },
+    {
+      "tag": "분노",
+      "code": "anger",
+      "subcategory": [
+        {
+          "tag": "답답",
+          "code": "stuffiness"
+        },
+        {
+          "tag": "미움",
+          "code": "hate"
+        },
+        {
+          "tag": "분함",
+          "code": "indignation"
+        },
+        {
+          "tag": "억울",
+          "code": "resentment"
+        },
+        {
+          "tag": "짜증",
+          "code": "irritation"
+        }
+      ]
+    },
+    {
+      "tag": "슬픔",
+      "code": "sadness",
+      "subcategory": [
+        {
+          "tag": "괴로움",
+          "code": "distress"
+        },
+        {
+          "tag": "막막함",
+          "code": "hopeless"
+        },
+        {
+          "tag": "미안함",
+          "code": "sorry"
+        },
+        {
+          "tag": "서운함",
+          "code": "regret"
+        },
+        {
+          "tag": "슬픔",
+          "code": "sorrow"
+        },
+        {
+          "tag": "실망",
+          "code": "disappointment"
+        },
+        {
+          "tag": "외로움",
+          "code": "loneliness"
+        },
+        {
+          "tag": "우울",
+          "code": "dumpishness"
+        },
+        {
+          "tag": "좌절",
+          "code": "setback"
+        },
+        {
+          "tag": "후회",
+          "code": "repentance"
+        },
+        {
+          "tag": "상실감",
+          "code": "loss"
+        },
+        {
+          "tag": "공허",
+          "code": "emptiness"
+        },
+        {
+          "tag": "허기",
+          "code": "hunger"
+        }
+      ]
+    },
+    {
+      "tag": "기쁨",
+      "code": "pleasure",
+      "subcategory": [
+        {
+          "tag": "감동",
+          "code": "emotion"
+        },
+        {
+          "tag": "감사",
+          "code": "thanks"
+        },
+        {
+          "tag": "기대",
+          "code": "expectation"
+        },
+        {
+          "tag": "기쁨",
+          "code": "delight"
+        },
+        {
+          "tag": "든든",
+          "code": "trust"
+        },
+        {
+          "tag": "만족",
+          "code": "satisfaction"
+        },
+        {
+          "tag": "사랑",
+          "code": "love"
+        },
+        {
+          "tag": "신남",
+          "code": "banging"
+        },
+        {
+          "tag": "자랑스러움",
+          "code": "proud"
+        },
+        {
+          "tag": "자신감",
+          "code": "confidence"
+        },
+        {
+          "tag": "재미",
+          "code": "fun"
+        },
+        {
+          "tag": "몰입",
+          "code": "devoted"
+        },
+        {
+          "tag": "편안",
+          "code": "comfort"
+        },
+        {
+          "tag": "평화로움",
+          "code": "peace"
+        },
+        {
+          "tag": "활기",
+          "code": "energy"
+        },
+        {
+          "tag": "호기심",
+          "code": "curiosity"
+        }
+      ]
+    }
+  ]
+}
