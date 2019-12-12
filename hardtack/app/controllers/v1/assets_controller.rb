@@ -8,9 +8,16 @@ class V1::AssetsController < ApplicationController
     render json: {latest_version: "1.0", bgcolors: ["fefefe", "000000", "ffffff"]}
   end
 
-  # GET /v1/assets/bgcolors
+  # GET /v1/assets/emotions
   def emotions
     file = File.join('assets', 'emotions.json')
+    emotions = File.read(file)
+    render json: JSON.parse(emotions)
+  end
+
+  # GET /v1/assets/emotion-image
+  def emotion_image
+    file = File.join('assets', 'emotion-image.json')
     emotions = File.read(file)
     render json: JSON.parse(emotions)
   end

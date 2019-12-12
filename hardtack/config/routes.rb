@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   namespace :v1 do
-    get   'assets/bgcolors', to: 'assets#bgcolors'
-    get   'assets/emotions', to: 'assets#emotions'
+    get   'assets/bgcolors',      to: 'assets#bgcolors'
+    get   'assets/emotions',      to: 'assets#emotions'
+    get   'assets/emotion-image', to: 'assets#emotion_image'
 
     get   'homes/mine', to: 'homes#mine'
     patch 'homes/mine', to: 'homes#update_mine'

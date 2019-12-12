@@ -1,0 +1,190 @@
+{
+  "thefun_bakery:default:hug:hug": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:fear:worry": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:fear:tension": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:fear:fright": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:fear:flustration": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:fear:anxiety": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:fear:confusion": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:displeasure:peskiness": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:displeasure:indifference": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:displeasure:shyness": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:displeasure:coldness": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:displeasure:boredom": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:displeasure:fatigue": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:anger:stuffiness": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:anger:hate": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:anger:indignation": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:anger:resentment": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:anger:irritation": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:sadness:distress": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:sadness:hopeless": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:sadness:sorry": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:sadness:regret": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:sadness:sorrow": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:sadness:disappointment": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:sadness:loneliness": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:sadness:dumpishness": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:sadness:setback": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:sadness:repentance": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:sadness:loss": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:sadness:emptiness": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:sadness:hunger": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:pleasure:emotion": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:pleasure:thanks": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:pleasure:expectation": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:pleasure:delight": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:pleasure:trust": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:pleasure:satisfaction": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:pleasure:love": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:pleasure:banging": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:pleasure:proud": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:pleasure:confidence": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:pleasure:fun": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:pleasure:devoted": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:pleasure:comfort": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:pleasure:peace": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:pleasure:energy": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  },
+  "thefun_bakery:default:pleasure:curiosity": {
+    "lottie": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/lotties/thefun_bakery%3Bdefault%3Bhug%3Bhug.json",
+    "svg": "https://thefun-bakery-public.s3.ap-northeast-2.amazonaws.com/images/thefun_bakery%3Bdefault%3Bhug%3Bhug.svg"
+  }
+}
