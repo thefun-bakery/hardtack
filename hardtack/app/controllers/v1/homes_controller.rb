@@ -65,10 +65,10 @@ class V1::HomesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def home_params
       #params.fetch(:v1_home, {})
-      params.fetch(:home, {}).permit(:name, :bgcolor)
+      params.fetch(:home, {}).permit(:name, :desc, :bgcolor)
     end
 
     def api_response(home)
-      home.to_json( :only => [:name, :bgcolor])
+      home.to_json( :only => [:name, :desc, :bgcolor])
     end
 end
