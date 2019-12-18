@@ -31,27 +31,39 @@ class V1::UserEmotionsController < ApplicationController
     @user_emotion.user_id = @home.user.id
     @user_emotion.home_id = @home.id
 
-    if @user_emotion.save
-      filename = params[:filename]
-      add_file(filename) unless filename.nil?
+    begin
+      ActiveRecord::Base.transaction do
+        if @user_emotion.save
+              filename = params[:filename]
+              add_file(filename) unless filename.nil?
 
-      emotion_map = load_emotion_map
-      render json: api_response(@user_emotion, emotion_map), status: :created, location: v1_user_emotion_url(@user_emotion)
-    else
-      render json: @user_emotion.errors, status: :unprocessable_entity
+              emotion_map = load_emotion_map
+          render json: api_response(@user_emotion, emotion_map), status: :created, location: v1_user_emotion_url(@user_emotion)
+        else
+          render json: @user_emotion.errors, status: :unprocessable_entity
+        end
+      end
+    rescue => e
+      raise ActiveRecord::Rollback
     end
   end
 
   # PATCH/PUT /v1/homes/1
   def update
-    if @user_emotion.update(user_emotion_params)
-      filename = params[:filename]
-      update_file(filename) unless filename.nil?
+    begin
+      ActiveRecord::Base.transaction do
+        if @user_emotion.update(user_emotion_params)
+          filename = params[:filename]
+          update_file(filename) unless filename.nil?
 
-      emotion_map = load_emotion_map
-      render json: api_response(@user_emotion, emotion_map)
-    else
-      render json: @user_emotion.errors, status: :unprocessable_entity
+          emotion_map = load_emotion_map
+          render json: api_response(@user_emotion, emotion_map)
+        else
+          render json: @user_emotion.errors, status: :unprocessable_entity
+        end
+      end
+    rescue => e
+      raise ActiveRecord::Rollback
     end
   end
 
@@ -106,13 +118,14 @@ class V1::UserEmotionsController < ApplicationController
     end
 
     def api_response(user_emotion, emotion_map)
+      user_image_url = user_emotion.files.length > 0 ? HardtackFileHelper.get_download_url(user_emotion.files[0]) : ""
       # NOTE, 이용자 파일의 무조건 첫번째 이미지만 취급한다.
       {
         id: user_emotion.id,
         emotion: user_emotion.emotion_key,
         emotion_url: emotion_map[user_emotion.emotion_key],
         tag: user_emotion.tag,
-        user_image_url: HardtackFileHelper.get_download_url(user_emotion.files[0]),
+        user_image_url: user_image_url,
         created_at: user_emotion.created_at,
         updated_at: user_emotion.updated_at
       }

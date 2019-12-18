@@ -27,7 +27,7 @@ module HardtackFileHelper
 
   def self.prepare_upload(user)
     filename = OpenSSL::HMAC.hexdigest("SHA256", KEY, Time.now.to_i.to_s)
-    HardtackFile.create(users_id: user.id, name: filename)
+    HardtackFile.create(user_id: user.id, name: filename)
     upload_url = self.client.put_object_url(
       BUCKET,
       path(filename),

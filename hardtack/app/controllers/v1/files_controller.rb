@@ -3,7 +3,7 @@ require 'hardtack_file_helper'
 class V1::FilesController < ApplicationController
   before_action :validate_authentication, only: [:prepare_upload, :show]
   before_action :set_user_by_header, only: [:prepare_upload]
-  before_action :set_home_by_users_id, only: [:prepare_upload]
+  before_action :set_home_by_user_id, only: [:prepare_upload]
 
 
   # GET /v1/files?filename=xxx
@@ -31,7 +31,7 @@ class V1::FilesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_home_by_users_id
+    def set_home_by_user_id
       @home = Home.find_by_user_id(@user.id)
     end
 

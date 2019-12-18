@@ -24,7 +24,7 @@ module Login
               {nickname: nickname, service: service, identifier: identifier}
             )
 
-            Home.create(users_id: user.id)
+            Home.create(user_id: user.id)
           end
         rescue => e
           raise ActiveRecord::Rollback
