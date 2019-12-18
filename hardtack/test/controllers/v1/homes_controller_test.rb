@@ -11,8 +11,10 @@ class V1::HomesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create v1_home" do
+    skip('not yet implemented')
+    new_home = @v1_home.dup
     assert_difference('Home.count') do
-      post v1_homes_url, params: { v1_home: {  } }, as: :json
+      post v1_homes_url, params: { v1_home: new_home }, as: :json
     end
 
     assert_response 201
@@ -24,7 +26,7 @@ class V1::HomesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update v1_home" do
-    patch v1_home_url(@v1_home), params: { v1_home: {  } }, as: :json
+    patch v1_home_url(@v1_home), params: { v1_home: { } }, as: :json
     assert_response 200
   end
 

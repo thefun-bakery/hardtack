@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     get   'assets/emotions',      to: 'assets#emotions'
     get   'assets/emotion-image', to: 'assets#emotion_image'
 
+    get   'user-emotions/mine', to: 'user_emotions#mine'
+    resources 'user-emotions', :controller => :user_emotions, :as => :user_emotions
+
     get   'homes/mine', to: 'homes#mine'
     patch 'homes/mine', to: 'homes#update_mine'
     resources :homes

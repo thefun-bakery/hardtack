@@ -6,12 +6,12 @@
 #
 one:
   user: one
-  name: 'home1'
-  desc: 'desc1'
-  bgcolor: '000000'
+  home: one
+  emotion_key: 'thefun_bakery:default:hug:hug'
+  tag: '#tag1, #tag2'
 
 two:
   user: two
-  name: 'home2'
-  desc: 'desc2'
-  bgcolor: '000000'
+  home: two
+  emotion_key: 'thefun_bakery:default:hug:hug'
+  tag: '#tag1, #tag2'

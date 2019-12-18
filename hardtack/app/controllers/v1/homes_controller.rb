@@ -3,7 +3,7 @@ class V1::HomesController < ApplicationController
 
   before_action :validate_authentication, only: [:mine, :update_mine]
   before_action :set_user_by_header, only: [:mine, :update_mine]
-  before_action :set_home_by_users_id, only: [:mine, :update_mine]
+  before_action :set_home_by_user_id, only: [:mine, :update_mine]
 
   # GET /v1/homes
   def index
@@ -58,8 +58,8 @@ class V1::HomesController < ApplicationController
       @home = Home.find(params[:id])
     end
 
-    def set_home_by_users_id
-      @home = Home.find_by_users_id(@user.id)
+    def set_home_by_user_id
+      @home = Home.find_by_user_id(@user.id)
     end
 
     # Only allow a trusted parameter "white list" through.

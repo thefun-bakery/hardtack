@@ -32,7 +32,7 @@ class V1::FilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_home_by_users_id
-      @home = Home.find_by_users_id(@user.id)
+      @home = Home.find_by_user_id(@user.id)
     end
 
     def file_params

@@ -10,26 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_30_075954) do
+ActiveRecord::Schema.define(version: 2019_12_14_163201) do
 
   create_table "files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.bigint "users_id"
+    t.bigint "user_id"
     t.string "name", null: false
     t.boolean "upload_complete", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_files_on_name", unique: true
-    t.index ["users_id"], name: "index_files_on_users_id"
+    t.index ["user_id"], name: "index_files_on_user_id"
   end
 
   create_table "homes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.bigint "users_id"
+    t.bigint "user_id"
     t.string "name", default: "my home", null: false
     t.string "desc", default: "welcome", null: false
     t.string "bgcolor", default: "000000", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["users_id"], name: "index_homes_on_users_id"
+    t.index ["user_id"], name: "index_homes_on_user_id"
+  end
+
+  create_table "user_emotion_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "user_emotion_id"
+    t.bigint "file_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["file_id"], name: "index_user_emotion_files_on_file_id"
+    t.index ["user_emotion_id"], name: "index_user_emotion_files_on_user_emotion_id"
+  end
+
+  create_table "user_emotions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "home_id"
+    t.string "emotion_key", null: false
+    t.string "tag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["emotion_key"], name: "index_user_emotions_on_emotion_key"
+    t.index ["home_id"], name: "index_user_emotions_on_home_id"
+    t.index ["user_id"], name: "index_user_emotions_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|

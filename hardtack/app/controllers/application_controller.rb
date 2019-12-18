@@ -24,7 +24,7 @@ class ApplicationController < ActionController::API
       authorization_header
     )
     id = Encryption.decrypt(hardtack_access_token)
-    @user = User.find_by_id(id)
+    @user = User.find(id)
     raise Error::UserNotfoundError if @user.nil?
   end
 end
