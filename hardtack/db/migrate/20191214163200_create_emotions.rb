@@ -1,6 +1,6 @@
-class CreateUserEmotions < ActiveRecord::Migration[6.0]
+class CreateEmotions < ActiveRecord::Migration[6.0]
   def change
-    create_table :user_emotions do |t|
+    create_table :emotions do |t|
       t.belongs_to :user
       t.belongs_to :home
       t.string :emotion_key, :null => false
@@ -8,6 +8,6 @@ class CreateUserEmotions < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_index :user_emotions, [:emotion_key]
+    add_index :emotions, [:emotion_key]
   end
 end

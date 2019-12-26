@@ -1,8 +1,0 @@
-user_emotion_file_one:
-  user_emotion: user_emotion_one
-  file: file_one
-
-user_emotion_file_two:
-  user_emotion: user_emotion_two
-  file: file_two
-

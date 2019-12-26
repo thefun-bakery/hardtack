@@ -9,8 +9,8 @@ Rails.application.routes.draw do
       get   'main/:id', to: 'main#show', :as => :main
     end
 
-    get   'user-emotions/mine', to: 'user_emotions#mine'
-    resources 'user-emotions', :controller => :user_emotions, :as => :user_emotions
+    get   'emotions/mine', to: 'emotions#mine'
+    resources 'emotions'
 
     get   'homes/mine', to: 'homes#mine'
     patch 'homes/mine', to: 'homes#update_mine'

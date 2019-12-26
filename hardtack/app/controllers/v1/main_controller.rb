@@ -21,7 +21,7 @@ class V1::MainController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_main
       # 가장 최근의 감정을 불러온다.
-      @emotion = UserEmotion.order(created_at: :desc).where(user_id: @home.user_id).first
+      @emotion = Emotion.order(created_at: :desc).where(user_id: @home.user_id).first
       @main = Main.new(
         home: @home,
         emotion: @emotion
