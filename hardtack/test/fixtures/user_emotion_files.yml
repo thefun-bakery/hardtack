@@ -1,8 +1,8 @@
-one:
-  user_emotion: one
-  file: one
+user_emotion_file_one:
+  user_emotion: user_emotion_one
+  file: file_one
 
-two:
-  user_emotion: two
-  file: two
+user_emotion_file_two:
+  user_emotion: user_emotion_two
+  file: file_two
 

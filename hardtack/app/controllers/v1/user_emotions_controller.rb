@@ -1,6 +1,8 @@
-require 'hardtack_file_helper'
-require 'error/bad_request_error'
 require 'json'
+
+require 'api_response'
+#require 'hardtack_file_helper'
+require 'error/bad_request_error'
 
 class V1::UserEmotionsController < ApplicationController
   before_action :validate_authentication
@@ -21,11 +23,11 @@ class V1::UserEmotionsController < ApplicationController
 
   # GET /v1/user-emotions/1
   def show
-    emotion_map = load_emotion_map
-    render json: api_response(@user_emotion, emotion_map)
+#    emotion_map = load_emotion_map
+    render json: ApiResponse.emotion(@user_emotion)
   end
 
-  # POST /v1/homes
+  # POST /v1/emotions
   def create
     @user_emotion = UserEmotion.new(user_emotion_params)
     @user_emotion.user_id = @home.user.id
@@ -37,8 +39,8 @@ class V1::UserEmotionsController < ApplicationController
               filename = params[:filename]
               add_file(filename) unless filename.nil?
 
-              emotion_map = load_emotion_map
-          render json: api_response(@user_emotion, emotion_map), status: :created, location: v1_user_emotion_url(@user_emotion)
+              #emotion_map = load_emotion_map
+          render json: ApiResponse.emotion(@user_emotion), status: :created, location: v1_user_emotion_url(@user_emotion)
         else
           render json: @user_emotion.errors, status: :unprocessable_entity
         end
@@ -48,7 +50,7 @@ class V1::UserEmotionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /v1/homes/1
+  # PATCH/PUT /v1/emotions/1
   def update
     begin
       ActiveRecord::Base.transaction do
@@ -56,8 +58,8 @@ class V1::UserEmotionsController < ApplicationController
           filename = params[:filename]
           update_file(filename) unless filename.nil?
 
-          emotion_map = load_emotion_map
-          render json: api_response(@user_emotion, emotion_map)
+          #emotion_map = load_emotion_map
+          render json: ApiResponse.emotion(@user_emotion)
         else
           render json: @user_emotion.errors, status: :unprocessable_entity
         end
@@ -67,16 +69,16 @@ class V1::UserEmotionsController < ApplicationController
     end
   end
 
-  # DELETE /v1/homes/1
+  # DELETE /v1/emotions/1
   def destroy
     @user_emotion.destroy
   end
 
-  # GET /v1/homes/mine
+  # GET /v1/emotions/mine
   def mine
-    emotion_map = load_emotion_map
+    #emotion_map = load_emotion_map
     @user_emotions = UserEmotion.where(home_id: @home.id).order(created_at: :desc).limit(10)
-    render json: api_list_response(@user_emotions, emotion_map)
+    render json: ApiResponse.emotion_list(@user_emotions)
   end
 
   private
@@ -92,51 +94,6 @@ class V1::UserEmotionsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def user_emotion_params
       params.fetch(:user_emotion, {}).permit(:emotion_key, :tag)
-    end
-
-    def get_emotion_map(emotions)
-      result = {}
-      for emotion in emotions do
-        images = emotion['images']
-        for image in images do
-          key = image['key']
-          svg = image['svg']
-          lottie = image['lottie']
-          result[key] = {svg: svg, lottie: lottie}
-        end
-      end
-
-      result
-    end
-    
-    def load_emotion_map
-      # TODO emotion mapping을 매번 파일에서 읽고 있는데, 이건 별도로 분리하자
-      file = File.join('assets', 'emotion-image.json')
-      str_emotions = File.read(file)
-      emotions = JSON.parse(str_emotions)
-      get_emotion_map(emotions)
-    end
-
-    def api_response(user_emotion, emotion_map)
-      user_image_url = user_emotion.files.length > 0 ? HardtackFileHelper.get_download_url(user_emotion.files[0]) : ""
-      # NOTE, 이용자 파일의 무조건 첫번째 이미지만 취급한다.
-      {
-        id: user_emotion.id,
-        emotion: user_emotion.emotion_key,
-        emotion_url: emotion_map[user_emotion.emotion_key],
-        tag: user_emotion.tag,
-        user_image_url: user_image_url,
-        created_at: user_emotion.created_at,
-        updated_at: user_emotion.updated_at
-      }
-    end
-
-    def api_list_response(user_emotions, emotion_map)
-      result = []
-      for user_emotion in user_emotions do
-        result.push(api_response(user_emotion, emotion_map))
-      end
-      result
     end
 
     def validate_permission

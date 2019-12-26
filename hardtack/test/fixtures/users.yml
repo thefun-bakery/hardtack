@@ -4,13 +4,13 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one:
+user_one:
   nickname: 'nick1'
   profile_image_filename: 'filename1'
   service: 'kakao'
   identifier: 1
 
-two:
+user_two:
   nickname: 'nick2'
   profile_image_filename: 'filename2'
   service: 'kakao'

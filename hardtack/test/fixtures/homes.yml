@@ -4,14 +4,14 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one:
-  user: one
+home_one:
+  user: user_one
   name: 'home1'
   desc: 'desc1'
   bgcolor: '000000'
 
-two:
-  user: two
+home_two:
+  user: user_two
   name: 'home2'
   desc: 'desc2'
   bgcolor: '000000'

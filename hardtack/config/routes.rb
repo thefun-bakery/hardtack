@@ -4,6 +4,11 @@ Rails.application.routes.draw do
     get   'assets/emotions',      to: 'assets#emotions'
     get   'assets/emotion-image', to: 'assets#emotion_image'
 
+    scope :display do
+      get   'main/mine', to: 'main#mine'
+      get   'main/:id', to: 'main#show', :as => :main
+    end
+
     get   'user-emotions/mine', to: 'user_emotions#mine'
     resources 'user-emotions', :controller => :user_emotions, :as => :user_emotions
 

@@ -5,13 +5,13 @@ require 'login'
 
 class V1::UserEmotionsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user_emotion = user_emotions(:one)
+    @user_emotion = user_emotions(:user_emotion_one)
     @hardtack_token = Login.login(@user_emotion.home.user)
 
-    @user_emotion_two = user_emotions(:two)
+    @user_emotion_two = user_emotions(:user_emotion_two)
 
-    @file_one = hardtack_files(:one)
-    @file_three = hardtack_files(:three)
+    @file_one = hardtack_files(:file_one)
+    @file_three = hardtack_files(:file_three)
   end
 
   test "should create v1_user_emotion" do

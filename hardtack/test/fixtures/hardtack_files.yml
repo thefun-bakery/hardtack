@@ -1,15 +1,15 @@
-one:
-  user: one
+file_one:
+  user: user_one
   name: '99a33e0b83c5a3f7229d5e394a1c94e232c985c4c54c9bff321c48be280dc6fb'
   upload_complete: true
 
-two:
-  user: two
+file_two:
+  user: user_two
   name: 'd56ac95db609826caf311ffe14f1cd837093aa96f7ba5e51b637f830602976c0'
   upload_complete: true
 
-three:
-  user: one
+file_three:
+  user: user_one
   name: 'fairy-tales-4057425_640.jpg'
   upload_complete: true
 

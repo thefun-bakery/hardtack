@@ -2,7 +2,7 @@ require 'test_helper'
 
 class V1::HomesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @v1_home = homes(:one)
+    @v1_home = homes(:home_one)
   end
 
   test "should get index" do

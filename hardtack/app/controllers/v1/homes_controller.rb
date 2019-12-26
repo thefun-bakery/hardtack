@@ -1,3 +1,5 @@
+require 'api_response'
+
 class V1::HomesController < ApplicationController
   before_action :set_home, only: [:show, :update, :destroy]
 
@@ -14,7 +16,7 @@ class V1::HomesController < ApplicationController
 
   # GET /v1/homes/1
   def show
-    render json: api_response(@home)
+    render json: ApiResponse.home(@home)
   end
 
   # POST /v1/homes
@@ -22,7 +24,7 @@ class V1::HomesController < ApplicationController
     @home = Home.new(home_params)
 
     if @home.save
-      render json: api_response(@home), status: :created, location: v1_home_url(@home)
+      render json: ApiResponse.home(@home), status: :created, location: v1_home_url(@home)
     else
       render json: @home.errors, status: :unprocessable_entity
     end
@@ -31,7 +33,7 @@ class V1::HomesController < ApplicationController
   # PATCH/PUT /v1/homes/1
   def update
     if @home.update(home_params)
-      render json: api_response(@home)
+      render json: ApiResponse.home(@home)
     else
       render json: @home.errors, status: :unprocessable_entity
     end
@@ -44,7 +46,7 @@ class V1::HomesController < ApplicationController
 
   # GET /v1/homes/mine
   def mine
-    render json: api_response(@home)
+    render json: ApiResponse.home(@home)
   end
 
   # PATCH /v1/homes/mine
@@ -66,9 +68,5 @@ class V1::HomesController < ApplicationController
     def home_params
       #params.fetch(:v1_home, {})
       params.fetch(:home, {}).permit(:name, :desc, :bgcolor)
-    end
-
-    def api_response(home)
-      home.to_json( :only => [:name, :desc, :bgcolor])
     end
 end
