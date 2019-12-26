@@ -12,6 +12,27 @@
 
 ActiveRecord::Schema.define(version: 2019_12_14_163201) do
 
+  create_table "emotion_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "emotion_id"
+    t.bigint "file_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["emotion_id"], name: "index_emotion_files_on_emotion_id"
+    t.index ["file_id"], name: "index_emotion_files_on_file_id"
+  end
+
+  create_table "emotions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "home_id"
+    t.string "emotion_key", null: false
+    t.string "tag"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["emotion_key"], name: "index_emotions_on_emotion_key"
+    t.index ["home_id"], name: "index_emotions_on_home_id"
+    t.index ["user_id"], name: "index_emotions_on_user_id"
+  end
+
   create_table "files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.string "name", null: false
@@ -30,27 +51,6 @@ ActiveRecord::Schema.define(version: 2019_12_14_163201) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_homes_on_user_id"
-  end
-
-  create_table "user_emotion_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.bigint "user_emotion_id"
-    t.bigint "file_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["file_id"], name: "index_user_emotion_files_on_file_id"
-    t.index ["user_emotion_id"], name: "index_user_emotion_files_on_user_emotion_id"
-  end
-
-  create_table "user_emotions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "home_id"
-    t.string "emotion_key", null: false
-    t.string "tag"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["emotion_key"], name: "index_user_emotions_on_emotion_key"
-    t.index ["home_id"], name: "index_user_emotions_on_home_id"
-    t.index ["user_id"], name: "index_user_emotions_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|

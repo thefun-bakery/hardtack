@@ -1,0 +1,8 @@
+emotion_file_one:
+  emotion: emotion_one
+  file: file_one
+
+emotion_file_two:
+  emotion: emotion_two
+  file: file_two
+

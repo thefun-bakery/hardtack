@@ -4,19 +4,19 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-user_emotion_one:
+emotion_one:
   user: user_one
   home: home_one
   emotion_key: 'thefun_bakery:default:hug:hug'
   tag: '#tag1, #tag2'
 
-user_emotion_two:
+emotion_two:
   user: user_two
   home: home_two
   emotion_key: 'thefun_bakery:default:hug:hug'
   tag: '#tag1, #tag2'
 
-user_emotion_three:
+emotion_three:
   user: user_one
   home: home_one
   emotion_key: 'thefun_bakery:default:hug:hug'
