@@ -73,4 +73,35 @@ class V1::EmotionsControllerTest < ActionDispatch::IntegrationTest
       as: :json
     assert_response 400
   end
+
+  test "emotions paging - page:0" do
+    #get v1_emotions_url(home: @emotion.home.id, offset: 3, howmany: 10),
+    get v1_emotions_url,
+      headers: { Authorization: "Bearer #{@hardtack_token}" },
+      as: :json
+    assert_response 200
+
+    result = JSON.parse(@response.body)
+    assert_equal(11, result.size)
+  end
+
+  test "emotions paging - page:last" do
+    get v1_emotions_url(home: @emotion.home.id, page: 1, howmany: 10),
+      headers: { Authorization: "Bearer #{@hardtack_token}" },
+      as: :json
+    assert_response 200
+
+    result = JSON.parse(@response.body)
+    assert_equal(2, result.size)
+  end
+
+  test "emotions paging - page:out_of_last" do
+    get v1_emotions_url(home: @emotion.home.id, page: 2),
+      headers: { Authorization: "Bearer #{@hardtack_token}" },
+      as: :json
+    assert_response 200
+
+    result = JSON.parse(@response.body)
+    assert_equal(0, result.size)
+  end
 end

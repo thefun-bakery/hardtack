@@ -15,7 +15,18 @@ class V1::EmotionsController < ApplicationController
 
   # GET /v1/homes
   def index
-    @emotions = Emotion.all
+    home_id = params[:home].to_i
+    page = params[:page].to_i
+    counts = [[params[:counts].to_i, 10].max, 100].min # 최소 10, 최대 100개로 조정.
+
+    offset = page * counts 
+    limit = counts + 1
+
+    field_selection = home_id == 0 ? {} : {home_id: home_id}
+    @emotions = Emotion.where(field_selection)
+      .offset(offset)
+      .limit(limit)
+      .order('id desc')
 
     render json: @emotions
   end
@@ -72,7 +83,19 @@ class V1::EmotionsController < ApplicationController
 
   # GET /v1/emotions/mine
   def mine
-    @emotions = Emotion.where(home_id: @home.id).order(created_at: :desc).limit(10)
+    #@emotions = Emotion.where(home_id: @home.id).order(created_at: :desc).limit(10)
+
+    page = params[:page].to_i
+    counts = [[params[:counts].to_i, 10].max, 100].min # 최소 10, 최대 100개로 조정.
+
+    offset = page * counts
+    limit = counts + 1
+
+    field_selection = {home_id: @home.id}
+    @emotions = Emotion.where(field_selection)
+      .offset(offset)
+      .limit(limit)
+      .order('id desc')
     render json: ApiResponse.emotion_list(@emotions)
   end
 
