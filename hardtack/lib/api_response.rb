@@ -67,8 +67,9 @@ module ApiResponse
       for image in images do
         key = image['key']
         svg = image['svg']
+        png = image['png']
         lottie = image['lottie']
-        result[key] = {svg: svg, lottie: lottie}
+        result[key] = {svg: svg, lottie: lottie, png: png}
       end
     end
 
