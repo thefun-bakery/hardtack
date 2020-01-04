@@ -15,3 +15,9 @@ user_two:
   profile_image_filename: 'filename2'
   service: 'kakao'
   identifier: 2
+
+user_3:
+  nickname: 'nick3'
+  profile_image_filename: 'filename3'
+  service: 'kakao'
+  identifier: 3

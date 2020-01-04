@@ -82,3 +82,8 @@ emotion_13:
   emotion_key: 'thefunbakery:default:hug:hug'
   tag: '#tag3, #tag4'
 
+emotion_no_hug:
+  user: user_3
+  home: home_3
+  emotion_key: 'thefunbakery:default:hug:hug'
+  tag: '#tag3, #tag4'
