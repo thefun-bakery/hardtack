@@ -7,12 +7,16 @@ module ApiResponse
   end
 
   def self.emotion(val_emotion)
+    return nil if val_emotion.nil?
     emotion_map = self.load_emotion_map
     self._emotion(val_emotion, emotion_map)
   end
 
   def self._emotion(val_emotion, emotion_map)
-    user_image_url = val_emotion.files.length > 0 ? HardtackFileHelper.get_download_url(val_emotion.files[0]) : ""
+    user_image_url = ""
+    if not (val_emotion.files.nil? or val_emotion.files.length == 0)
+      user_image_url = HardtackFileHelper.get_download_url(val_emotion.files[0])
+    end
     # NOTE, 이용자 파일의 무조건 첫번째 이미지만 취급한다.
     {
       id: val_emotion.id,
@@ -44,7 +48,9 @@ module ApiResponse
         id: val_main.home.id,
         name: val_main.home.name,
         desc: val_main.home.desc,
-        bgcolor: val_main.home.bgcolor
+        bgcolor: val_main.home.bgcolor,
+        visit: val_main.home.home_visit_count.nil? \
+          ? 0 : val_main.home.home_visit_count.visit_count
       },
       emotion: self.emotion(val_main.emotion)
     }

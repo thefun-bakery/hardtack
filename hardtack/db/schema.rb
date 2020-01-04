@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_14_163201) do
+ActiveRecord::Schema.define(version: 2020_01_04_222201) do
 
   create_table "emotion_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "emotion_id"
@@ -19,6 +19,24 @@ ActiveRecord::Schema.define(version: 2019_12_14_163201) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["emotion_id"], name: "index_emotion_files_on_emotion_id"
     t.index ["file_id"], name: "index_emotion_files_on_file_id"
+  end
+
+  create_table "emotion_hug_counts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "emotion_id"
+    t.integer "hug_count", default: 1
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["emotion_id"], name: "index_emotion_hug_counts_on_emotion_id"
+  end
+
+  create_table "emotion_hug_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "emotion_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["emotion_id", "user_id"], name: "index_emotion_hug_histories_on_emotion_id_and_user_id", unique: true
+    t.index ["emotion_id"], name: "index_emotion_hug_histories_on_emotion_id"
+    t.index ["user_id"], name: "index_emotion_hug_histories_on_user_id"
   end
 
   create_table "emotions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -41,6 +59,23 @@ ActiveRecord::Schema.define(version: 2019_12_14_163201) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_files_on_name", unique: true
     t.index ["user_id"], name: "index_files_on_user_id"
+  end
+
+  create_table "home_visit_counts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "home_id"
+    t.integer "visit_count", default: 1
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["home_id"], name: "index_home_visit_counts_on_home_id"
+  end
+
+  create_table "home_visit_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "home_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["home_id"], name: "index_home_visit_histories_on_home_id"
+    t.index ["user_id"], name: "index_home_visit_histories_on_user_id"
   end
 
   create_table "homes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|

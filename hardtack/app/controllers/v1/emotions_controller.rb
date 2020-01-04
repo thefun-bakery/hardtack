@@ -13,7 +13,7 @@ class V1::EmotionsController < ApplicationController
   before_action :validate_permission, only: [:update, :destroy]
 
 
-  # GET /v1/homes
+  # GET /v1/emotions
   def index
     home_id = params[:home].to_i
     page = params[:page].to_i
@@ -34,6 +34,40 @@ class V1::EmotionsController < ApplicationController
   # GET /v1/emotions/1
   def show
     render json: ApiResponse.emotion(@emotion)
+  end
+
+  # POST /v1/emotions/:id/hug
+  def hug
+    id = params[:id].to_i
+    @emotion = Emotion.find_by_id(id)
+
+    # 내가 나를 안아주는건 안해준다.
+    raise Error::BadRequestError, "can't hug self" if @emotion.user_id == @user.id
+
+    emotion_hug_count = nil
+    ActiveRecord::Base.transaction do
+      emotion_hug_count = plus_hug_count
+      log_hug
+    end
+
+    render json: emotion_hug_count
+  end
+
+  # DELETE /v1/emotions/:id/hug
+  def unhug
+    id = params[:id].to_i
+    @emotion = Emotion.find_by_id(id)
+
+    # 내가 나를 안안아주는건 안해준다.
+    raise Error::BadRequestError, "can't unhug self" if @emotion.user_id == @user.id
+
+    emotion_hug_count = nil
+    ActiveRecord::Base.transaction do
+      emotion_hug_count = minus_hug_count
+      unlog_hug
+    end
+
+    render json: emotion_hug_count
   end
 
   # POST /v1/emotions
@@ -136,5 +170,42 @@ class V1::EmotionsController < ApplicationController
     def _add_file(emotion_id, file_id, filename)
       emotion_file = EmotionFile.new({emotion_id: emotion_id, file_id: file_id})
       raise Error::InternalServerError, "failed to save #{filename}" unless emotion_file.save
+    end
+
+    def plus_hug_count
+      if @emotion.emotion_hug_count.nil?
+        EmotionHugCount.create(emotion: @emotion)
+      else
+        @emotion.emotion_hug_count.hug_count += 1
+        @emotion.emotion_hug_count.save!
+        return @emotion.emotion_hug_count
+      end
+    end
+
+    def minus_hug_count
+      if @emotion.emotion_hug_count.nil?
+        raise Error::BadRequestError,'no hug count'
+      else
+        @emotion.emotion_hug_count.hug_count -= 1
+        @emotion.emotion_hug_count.save!
+        return @emotion.emotion_hug_count
+      end
+    end
+
+    def log_hug
+      begin
+        EmotionHugHistory.create({emotion: @emotion, user: @user})
+      rescue ActiveRecord::RecordNotUnique => e
+        raise Error::BadRequestError,'already hugged'
+      end
+    end
+
+    def unlog_hug
+      emotion_hug_history = EmotionHugHistory.find_by_emotion_id_and_user_id(@emotion, @user)
+      if emotion_hug_history.nil?
+        raise Error::BadRequestError,'no hug history'
+      else
+        emotion_hug_history.delete
+      end
     end
 end

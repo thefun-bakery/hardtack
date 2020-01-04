@@ -9,6 +9,7 @@ class V1::EmotionsControllerTest < ActionDispatch::IntegrationTest
     @hardtack_token = Login.login(@emotion.home.user)
 
     @emotion_two = emotions(:emotion_two)
+    @emotion_no_hug = emotions(:emotion_no_hug)
 
     @file_one = hardtack_files(:file_one)
     @file_three = hardtack_files(:file_three)
@@ -103,5 +104,76 @@ class V1::EmotionsControllerTest < ActionDispatch::IntegrationTest
 
     result = JSON.parse(@response.body)
     assert_equal(0, result.size)
+  end
+
+
+  test "emotions hug self" do
+    post v1_emotion_hug_url(@emotion),
+      headers: { Authorization: "Bearer #{@hardtack_token}" },
+      as: :json
+    assert_response 400
+  end
+
+
+  test "emotions hug" do
+    post v1_emotion_hug_url(@emotion_no_hug),
+      headers: { Authorization: "Bearer #{@hardtack_token}" },
+      as: :json
+    assert_response 200
+
+    result = JSON.parse(@response.body)
+    assert_equal(1, result['hug_count'])
+
+    # 이미 hug 했는데 또 하려고 할 때.
+    post v1_emotion_hug_url(@emotion_no_hug),
+      headers: { Authorization: "Bearer #{@hardtack_token}" },
+      as: :json
+    assert_response 400
+    assert_equal 1, EmotionHugCount.find_by_emotion_id(@emotion_no_hug.id).hug_count
+  end
+
+
+  test "emotions hug emotion already hugged by another user" do
+    post v1_emotion_hug_url(@emotion_two),
+      headers: { Authorization: "Bearer #{@hardtack_token}" },
+      as: :json
+    assert_response 200
+
+    result = JSON.parse(@response.body)
+    assert_equal(2, result['hug_count'])
+    assert_equal 2, EmotionHugHistory.all.length
+  end
+
+
+  test "emotions unhug self" do
+    post v1_emotion_hug_url(@emotion),
+      headers: { Authorization: "Bearer #{@hardtack_token}" },
+      as: :json
+    assert_response 400
+  end
+
+
+  test "emotions unhug" do
+    post v1_emotion_hug_url(@emotion_two),
+      headers: { Authorization: "Bearer #{@hardtack_token}" },
+      as: :json
+    assert_response 200
+
+    # hug 한것을 다시 unhug 한다.
+    delete v1_emotion_unhug_url(@emotion_two),
+      headers: { Authorization: "Bearer #{@hardtack_token}" },
+      as: :json
+    assert_response 200
+    result = JSON.parse(@response.body)
+    assert_equal 1, result['hug_count']
+    assert_equal 1, EmotionHugHistory.all.length
+  end
+
+
+  test "emotions unhug empty count" do
+    delete v1_emotion_unhug_url(@emotion_no_hug),
+      headers: { Authorization: "Bearer #{@hardtack_token}" },
+      as: :json
+    assert_response 400
   end
 end
