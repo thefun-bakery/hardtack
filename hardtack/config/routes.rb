@@ -6,10 +6,12 @@ Rails.application.routes.draw do
 
     scope :display do
       get   'main/mine', to: 'main#mine'
-      get   'main/:id', to: 'main#show', :as => :main
+      get   'main/:home_id', to: 'main#show', :as => :main
     end
 
-    get   'emotions/mine', to: 'emotions#mine'
+    get       'emotions/mine', to: 'emotions#mine'
+    post      'emotions/:id/hug', to: 'emotions#hug', :as => :emotion_hug
+    delete    'emotions/:id/hug', to: 'emotions#unhug', :as => :emotion_unhug
     resources 'emotions'
 
     get   'homes/mine', to: 'homes#mine'

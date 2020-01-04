@@ -6,13 +6,17 @@ module ApiResponse
     val_home.to_json( :only => [:name, :desc, :bgcolor])
   end
 
-  def self.emotion(val_emotion)
+  def self.emotion(val_emotion, user)
+    return nil if val_emotion.nil?
     emotion_map = self.load_emotion_map
-    self._emotion(val_emotion, emotion_map)
+    self._emotion(val_emotion, emotion_map, user)
   end
 
-  def self._emotion(val_emotion, emotion_map)
-    user_image_url = val_emotion.files.length > 0 ? HardtackFileHelper.get_download_url(val_emotion.files[0]) : ""
+  def self._emotion(val_emotion, emotion_map, user)
+    user_image_url = ""
+    if not (val_emotion.files.nil? or val_emotion.files.length == 0)
+      user_image_url = HardtackFileHelper.get_download_url(val_emotion.files[0])
+    end
     # NOTE, 이용자 파일의 무조건 첫번째 이미지만 취급한다.
     {
       id: val_emotion.id,
@@ -20,22 +24,24 @@ module ApiResponse
       emotion_url: emotion_map[val_emotion.emotion_key],
       tag: val_emotion.tag,
       user_image_url: user_image_url,
+      hug_count: val_emotion.hug_count,
+      did_i_hug: val_emotion.did_i_hug?(user),
       created_at: val_emotion.created_at,
       updated_at: val_emotion.updated_at
     }
   end
 
-  def self.emotion_list(emotions)
+  def self.emotion_list(emotions, user)
     emotion_map = self.load_emotion_map
 
     result = []
     for val_emotion in emotions do
-      result.push(self._emotion(val_emotion, emotion_map))
+      result.push(self._emotion(val_emotion, emotion_map, user))
     end
     result
   end
 
-  def self.main(val_main)
+  def self.main(val_main, user)
     {
       user: {
         id: val_main.home.user_id
@@ -44,9 +50,11 @@ module ApiResponse
         id: val_main.home.id,
         name: val_main.home.name,
         desc: val_main.home.desc,
-        bgcolor: val_main.home.bgcolor
+        bgcolor: val_main.home.bgcolor,
+        visit_count: val_main.home.home_visit_count.nil? \
+          ? 0 : val_main.home.home_visit_count.visit_count
       },
-      emotion: self.emotion(val_main.emotion)
+      emotion: self.emotion(val_main.emotion, user)
     }
   end
 

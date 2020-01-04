@@ -15,3 +15,9 @@ home_two:
   name: 'home2'
   desc: 'desc2'
   bgcolor: '000000'
+
+home_no_visit_count_and_visit_log:
+  user: user_3
+  name: 'home3'
+  desc: 'desc3'
+  bgcolor: '000000'
