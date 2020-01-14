@@ -46,6 +46,26 @@ class V1::EmotionsControllerTest < ActionDispatch::IntegrationTest
     assert_not_equal(0, json_response.length)
   end
 
+
+  test "should index v1_emotions" do
+    get v1_emotions_url(page: 1, howmany: 10),
+      headers: { Authorization: "Bearer #{@hardtack_token}" },
+      as: :json
+    assert_response :success
+    json_response = JSON.parse(@response.body)
+    assert_equal(4, json_response.length)
+  end
+
+  test "should index v1_emotions_out_of_index" do
+    get v1_emotions_url(page: 2, howmany: 10),
+      headers: { Authorization: "Bearer #{@hardtack_token}" },
+      as: :json
+    assert_response :success
+    json_response = JSON.parse(@response.body)
+    assert_equal(0, json_response.length)
+  end
+
+
   test "should update v1_emotion" do
     patch v1_emotion_url(@emotion),
       params: {
