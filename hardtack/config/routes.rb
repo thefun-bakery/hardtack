@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 
     get   'files/prepare-upload', to: 'files#prepare_upload'
     resources :files, only: [:show], param: :filename
+
+    resources :followers, only: [:create, :show, :destroy]
   end
 
   get '/404', to: 'errors#not_found'
