@@ -27,6 +27,8 @@ Rails.application.routes.draw do
     resources :files, only: [:show], param: :filename
 
     resources :followers, only: [:create, :show, :destroy]
+
+    resources :feeds, only: [:index, :show, :destroy]
   end
 
   get '/404', to: 'errors#not_found'

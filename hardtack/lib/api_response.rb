@@ -22,6 +22,11 @@ module ApiResponse
       id: val_emotion.id,
       emotion: val_emotion.emotion_key,
       emotion_url: emotion_map[val_emotion.emotion_key],
+      emotion_owner: {
+        id: val_emotion.user.id,
+        home_id: val_emotion.user.home.id,
+        home_desc: val_emotion.user.home.desc
+      },
       tag: val_emotion.tag,
       user_image_url: user_image_url,
       hug_count: val_emotion.hug_count,
@@ -37,6 +42,16 @@ module ApiResponse
     result = []
     for val_emotion in emotions do
       result.push(self._emotion(val_emotion, emotion_map, user))
+    end
+    result
+  end
+
+  def self.feed_list(feeds, user)
+    emotion_map = self.load_emotion_map
+
+    result = []
+    for feed in feeds do
+      result.push({id: feed.id, emotion: self._emotion(feed.emotion, emotion_map, user)})
     end
     result
   end

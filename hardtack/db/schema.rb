@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_15_012401) do
+ActiveRecord::Schema.define(version: 2020_01_17_014601) do
 
   create_table "emotion_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "emotion_id"
@@ -49,6 +49,16 @@ ActiveRecord::Schema.define(version: 2020_01_15_012401) do
     t.index ["emotion_key"], name: "index_emotions_on_emotion_key"
     t.index ["home_id"], name: "index_emotions_on_home_id"
     t.index ["user_id"], name: "index_emotions_on_user_id"
+  end
+
+  create_table "feeds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "follower_id", null: false
+    t.bigint "emotion_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["emotion_id"], name: "index_feeds_on_emotion_id"
+    t.index ["follower_id", "emotion_id"], name: "index_feeds_on_follower_id_and_emotion_id", unique: true
+    t.index ["follower_id"], name: "index_feeds_on_follower_id"
   end
 
   create_table "files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
