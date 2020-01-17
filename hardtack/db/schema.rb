@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_04_222201) do
+ActiveRecord::Schema.define(version: 2020_01_17_014601) do
 
   create_table "emotion_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "emotion_id"
@@ -51,6 +51,16 @@ ActiveRecord::Schema.define(version: 2020_01_04_222201) do
     t.index ["user_id"], name: "index_emotions_on_user_id"
   end
 
+  create_table "feeds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "follower_id", null: false
+    t.bigint "emotion_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["emotion_id"], name: "index_feeds_on_emotion_id"
+    t.index ["follower_id", "emotion_id"], name: "index_feeds_on_follower_id_and_emotion_id", unique: true
+    t.index ["follower_id"], name: "index_feeds_on_follower_id"
+  end
+
   create_table "files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.string "name", null: false
@@ -59,6 +69,16 @@ ActiveRecord::Schema.define(version: 2020_01_04_222201) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_files_on_name", unique: true
     t.index ["user_id"], name: "index_files_on_user_id"
+  end
+
+  create_table "followers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "followee_id", null: false
+    t.bigint "follower_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["followee_id", "follower_id"], name: "index_followers_on_followee_id_and_follower_id", unique: true
+    t.index ["followee_id"], name: "index_followers_on_followee_id"
+    t.index ["follower_id"], name: "index_followers_on_follower_id"
   end
 
   create_table "home_visit_counts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|

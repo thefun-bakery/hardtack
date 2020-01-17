@@ -1,0 +1,11 @@
+follower_1:
+  followee: user_one
+  follower: user_two
+
+follower_2:
+  followee: user_two
+  follower: user_3
+
+follower_3:
+  followee: user_one
+  follower: user_3

@@ -81,13 +81,16 @@ class V1::EmotionsController < ApplicationController
         if @emotion.save
               filename = params[:filename]
               add_file(filename) unless filename.nil?
-
+              
+              # feed emotion to fowllower
+              feed_emotion_to_follower
           render json: ApiResponse.emotion(@emotion, @user), status: :created, location: v1_emotion_url(@emotion)
         else
           render json: @emotion.errors, status: :unprocessable_entity
         end
       end
     rescue => e
+      Rails.logger.error e
       raise ActiveRecord::Rollback
     end
   end
@@ -106,13 +109,22 @@ class V1::EmotionsController < ApplicationController
         end
       end
     rescue => e
+      Rails.logger.error e
       raise ActiveRecord::Rollback
     end
   end
 
   # DELETE /v1/emotions/1
   def destroy
-    @emotion.destroy
+    begin
+      ActiveRecord::Base.transaction do
+        unfeed_emotion_to_follower
+        @emotion.destroy
+      end
+    rescue => e
+      Rails.logger.error e
+      raise ActiveRecord::Rollback
+    end
   end
 
   # GET /v1/emotions/mine
@@ -133,79 +145,99 @@ class V1::EmotionsController < ApplicationController
     render json: ApiResponse.emotion_list(@emotions, @user)
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_emotion
-      @emotion = Emotion.find(params[:id])
-    end
+private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_emotion
+    @emotion = Emotion.find(params[:id])
+  end
 
-    def set_home_by_user_id
-      @home = Home.find_by_user_id(@user.id)
-    end
+  def set_home_by_user_id
+    @home = Home.find_by_user_id(@user.id)
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def emotion_params
-      params.fetch(:emotion, {}).permit(:emotion_key, :tag)
-    end
+  # Only allow a trusted parameter "white list" through.
+  def emotion_params
+    params.fetch(:emotion, {}).permit(:emotion_key, :tag)
+  end
 
-    def validate_permission
-      raise Error::BadRequestError,'permission denied' unless @emotion.user_id == @user.id
-    end
+  def validate_permission
+    raise Error::BadRequestError,'permission denied' unless @emotion.user_id == @user.id
+  end
 
-    def add_file(filename)
-      file = HardtackFile.find_by_name(filename)
-      if not file.nil?
-        _add_file(@emotion.id, file.id, filename)
+  def add_file(filename)
+    file = HardtackFile.find_by_name(filename)
+    if not file.nil?
+      _add_file(@emotion.id, file.id, filename)
+    end
+  end
+
+  def update_file(filename)
+    file = HardtackFile.find_by_name(filename)
+    # fileupload를 한개만 한다고 가정한다.
+    if not file.nil? and file.id != @emotion.files[0].id
+      _add_file(@emotion.id, file.id, filename)
+    end
+  end
+
+  def _add_file(emotion_id, file_id, filename)
+    emotion_file = EmotionFile.new({emotion_id: emotion_id, file_id: file_id})
+    raise Error::InternalServerError, "failed to save #{filename}" unless emotion_file.save
+  end
+
+  def plus_hug_count
+    if @emotion.emotion_hug_count.nil?
+      EmotionHugCount.create(emotion: @emotion)
+    else
+      @emotion.emotion_hug_count.hug_count += 1
+      @emotion.emotion_hug_count.save!
+      return @emotion.emotion_hug_count
+    end
+  end
+
+  def minus_hug_count
+    if @emotion.emotion_hug_count.nil?
+      raise Error::BadRequestError,'no hug count'
+    else
+      @emotion.emotion_hug_count.hug_count -= 1
+      @emotion.emotion_hug_count.save!
+      return @emotion.emotion_hug_count
+    end
+  end
+
+  def log_hug
+    begin
+      EmotionHugHistory.create({emotion: @emotion, user: @user})
+    rescue ActiveRecord::RecordNotUnique => e
+      raise Error::BadRequestError,'already hugged'
+    end
+  end
+
+  def unlog_hug
+    emotion_hug_history = EmotionHugHistory.find_by_emotion_id_and_user_id(@emotion, @user)
+    if emotion_hug_history.nil?
+      raise Error::BadRequestError,'no hug history'
+    else
+      emotion_hug_history.delete
+    end
+  end
+
+  def feed_emotion_to_follower
+    followers = Follower.where(followee_id: @user.id)
+    for follower in followers do
+      Feed.create(follower_id: follower.follower_id, emotion_id: @emotion.id)
+    end
+  end
+
+  def unfeed_emotion_to_follower
+    followers = Follower.where(followee_id: @user.id)
+    for follower in followers do
+      feeds = Feed.where(
+        follower_id: follower.follower_id,
+         emotion_id: @emotion.id
+      )
+      for feed in feeds do
+        feed.destroy
       end
     end
-
-    def update_file(filename)
-      file = HardtackFile.find_by_name(filename)
-      # fileupload를 한개만 한다고 가정한다.
-      if not file.nil? and file.id != @emotion.files[0].id
-        _add_file(@emotion.id, file.id, filename)
-      end
-    end
-
-    def _add_file(emotion_id, file_id, filename)
-      emotion_file = EmotionFile.new({emotion_id: emotion_id, file_id: file_id})
-      raise Error::InternalServerError, "failed to save #{filename}" unless emotion_file.save
-    end
-
-    def plus_hug_count
-      if @emotion.emotion_hug_count.nil?
-        EmotionHugCount.create(emotion: @emotion)
-      else
-        @emotion.emotion_hug_count.hug_count += 1
-        @emotion.emotion_hug_count.save!
-        return @emotion.emotion_hug_count
-      end
-    end
-
-    def minus_hug_count
-      if @emotion.emotion_hug_count.nil?
-        raise Error::BadRequestError,'no hug count'
-      else
-        @emotion.emotion_hug_count.hug_count -= 1
-        @emotion.emotion_hug_count.save!
-        return @emotion.emotion_hug_count
-      end
-    end
-
-    def log_hug
-      begin
-        EmotionHugHistory.create({emotion: @emotion, user: @user})
-      rescue ActiveRecord::RecordNotUnique => e
-        raise Error::BadRequestError,'already hugged'
-      end
-    end
-
-    def unlog_hug
-      emotion_hug_history = EmotionHugHistory.find_by_emotion_id_and_user_id(@emotion, @user)
-      if emotion_hug_history.nil?
-        raise Error::BadRequestError,'no hug history'
-      else
-        emotion_hug_history.delete
-      end
-    end
+  end
 end

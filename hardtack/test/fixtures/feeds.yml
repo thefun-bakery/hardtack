@@ -1,0 +1,7 @@
+feed_1:
+  follower: user_3
+  emotion: emotion_one
+
+feed_2:
+  follower: user_3
+  emotion: emotion_three
