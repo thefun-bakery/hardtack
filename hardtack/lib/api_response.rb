@@ -22,11 +22,7 @@ module ApiResponse
       id: val_emotion.id,
       emotion: val_emotion.emotion_key,
       emotion_url: emotion_map[val_emotion.emotion_key],
-      emotion_owner: {
-        id: val_emotion.user.id,
-        home_id: val_emotion.user.home.id,
-        home_desc: val_emotion.user.home.desc
-      },
+      emotion_owner: self.user_info(val_emotion.user),
       tag: val_emotion.tag,
       user_image_url: user_image_url,
       hug_count: val_emotion.hug_count,
@@ -56,6 +52,30 @@ module ApiResponse
     result
   end
 
+  def self.hug_feed_list(hug_feeds, user)
+    emotion_map = self.load_emotion_map
+
+    result = []
+    for hug_feed in hug_feeds do
+      result.push(
+        {
+          id: hug_feed.id,
+          emotion: self._emotion(hug_feed.emotion, emotion_map, user),
+          hugger: self.user_info(hug_feed.hugger)
+        }
+      )
+    end
+    result
+  end
+
+  def self.huggers(emotion_hug_histories, user)
+    result = []
+    for emotion_hug_history in emotion_hug_histories do
+      result.push( self.user_info(emotion_hug_history.user) )
+    end
+    result
+  end
+
   def self.main(val_main, user)
     {
       user: {
@@ -73,7 +93,20 @@ module ApiResponse
     }
   end
 
-  private
+
+private
+
+  def self.user_info(user)
+    return {} if user.nil?
+
+    {
+      id: user.id,
+      nickname: user.nickname,
+      home_id: user.home.id,
+      home_name: user.home.name,
+      home_desc: user.home.desc
+    }
+  end
 
   def self.load_emotion_map
     # TODO emotion mapping을 매번 파일에서 읽고 있는데, 이건 별도로 분리하자

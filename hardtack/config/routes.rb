@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get       'emotions/mine', to: 'emotions#mine'
     post      'emotions/:id/hug', to: 'emotions#hug', :as => :emotion_hug
     delete    'emotions/:id/hug', to: 'emotions#unhug', :as => :emotion_unhug
+    get       'emotions/:id/huggers', to: 'emotions#huggers', :as => :emotion_huggers
     resources 'emotions'
 
     get   'homes/mine', to: 'homes#mine'
@@ -29,6 +30,8 @@ Rails.application.routes.draw do
     resources :followers, only: [:create, :show, :destroy]
 
     resources :feeds, only: [:index, :show, :destroy]
+
+    resources :hug_feeds, only: [:index, :show, :destroy], path: 'hug-feeds'
   end
 
   get '/404', to: 'errors#not_found'

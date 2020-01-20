@@ -7,6 +7,7 @@ class V1::EmotionsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @emotion = emotions(:emotion_one)
     @hardtack_token = Login.login(@emotion.home.user)
+    @hardtack_token_3 = Login.login(users(:user_3))
 
     @emotion_two = emotions(:emotion_two)
     @emotion_no_hug = emotions(:emotion_no_hug)
@@ -127,14 +128,6 @@ class V1::EmotionsControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "emotions hug self" do
-    post v1_emotion_hug_url(@emotion),
-      headers: { Authorization: "Bearer #{@hardtack_token}" },
-      as: :json
-    assert_response 400
-  end
-
-
   test "emotions hug and check emotion response" do
     # 안아주기 전 emotion 검사
     get v1_emotion_url(@emotion_no_hug),
@@ -196,12 +189,13 @@ class V1::EmotionsControllerTest < ActionDispatch::IntegrationTest
     assert_response 200
 
     result = JSON.parse(@response.body)
+    # user_one 이 이미 안아준 감정임.
     assert_equal(1, result['hug_count'])
-    assert_equal(false, result['did_i_hug'])
+    assert_equal(true, result['did_i_hug'])
 
-    # 안아주기
+    # user_3이 또 안아주기
     post v1_emotion_hug_url(@emotion_two),
-      headers: { Authorization: "Bearer #{@hardtack_token}" },
+      headers: { Authorization: "Bearer #{@hardtack_token_3}" },
       as: :json
     assert_response 200
 
@@ -211,28 +205,29 @@ class V1::EmotionsControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "emotions unhug self" do
+  test "emotions hug/unhug self" do
     post v1_emotion_hug_url(@emotion),
-      headers: { Authorization: "Bearer #{@hardtack_token}" },
-      as: :json
-    assert_response 400
-  end
-
-
-  test "emotions unhug" do
-    post v1_emotion_hug_url(@emotion_two),
       headers: { Authorization: "Bearer #{@hardtack_token}" },
       as: :json
     assert_response 200
 
+    delete v1_emotion_hug_url(@emotion),
+      headers: { Authorization: "Bearer #{@hardtack_token}" },
+      as: :json
+    assert_response 200
+  end
+
+
+  test "emotions unhug" do
     # hug 한것을 다시 unhug 한다.
+    # emotion_two 는 user_1이 이미 안아줌.
     delete v1_emotion_unhug_url(@emotion_two),
       headers: { Authorization: "Bearer #{@hardtack_token}" },
       as: :json
     assert_response 200
     result = JSON.parse(@response.body)
-    assert_equal 1, result['hug_count']
-    assert_equal 1, EmotionHugHistory.all.length
+    assert_equal 0, result['hug_count']
+    assert_equal 0, EmotionHugHistory.all.length
   end
 
 
@@ -241,5 +236,15 @@ class V1::EmotionsControllerTest < ActionDispatch::IntegrationTest
       headers: { Authorization: "Bearer #{@hardtack_token}" },
       as: :json
     assert_response 400
+  end
+
+
+  test "should show huugers of emotion_two " do
+    get v1_emotion_huggers_url(id: @emotion_two, page: 0, howmany: 10),
+      headers: { Authorization: "Bearer #{@hardtack_token}" },
+      as: :json
+    assert_response :success
+    json_response = JSON.parse(@response.body)
+    assert_equal(1, json_response.length)
   end
 end

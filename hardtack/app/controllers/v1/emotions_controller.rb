@@ -39,15 +39,17 @@ class V1::EmotionsController < ApplicationController
   # POST /v1/emotions/:id/hug
   def hug
     id = params[:id].to_i
-    @emotion = Emotion.find_by_id(id)
+    @emotion = Emotion.find(id)
 
-    # 내가 나를 안아주는건 안해준다.
-    raise Error::BadRequestError, "can't hug self" if @emotion.user_id == @user.id
+    # issue #50 에 따라 아래를 허용해줌
+#    # 내가 나를 안아주는건 안해준다.
+#    raise Error::BadRequestError, "can't hug self" if @emotion.user_id == @user.id
 
     emotion_hug_count = nil
     ActiveRecord::Base.transaction do
       emotion_hug_count = plus_hug_count
       log_hug
+      feed_emotion_hug_to_follower
     end
 
     render json: emotion_hug_count
@@ -56,18 +58,40 @@ class V1::EmotionsController < ApplicationController
   # DELETE /v1/emotions/:id/hug
   def unhug
     id = params[:id].to_i
-    @emotion = Emotion.find_by_id(id)
+    @emotion = Emotion.find(id)
 
-    # 내가 나를 안안아주는건 안해준다.
-    raise Error::BadRequestError, "can't unhug self" if @emotion.user_id == @user.id
+    # issue #50 에 따라 아래를 허용해줌
+#    # 내가 나를 안안아주는건 안해준다.
+#    raise Error::BadRequestError, "can't unhug self" if @emotion.user_id == @user.id
 
     emotion_hug_count = nil
     ActiveRecord::Base.transaction do
       emotion_hug_count = minus_hug_count
       unlog_hug
+      unfeed_emotion_unhug_to_follower
     end
 
     render json: emotion_hug_count
+  end
+
+  # GET /v1/emotions/:id/huggers
+  def huggers
+    id = params[:id].to_i
+    @emotion = Emotion.find(id)
+
+    page = params[:page].to_i
+    counts = [[params[:counts].to_i, 10].max, 100].min # 최소 10, 최대 100개로 조정.
+
+    offset = page * counts 
+    limit = counts + 1
+
+    field_selection = {emotion_id: id}
+    @emotion_hug_histories = EmotionHugHistory.where(field_selection)
+      .offset(offset)
+      .limit(limit)
+      .order('id desc')
+
+    render json: ApiResponse.huggers(@emotion_hug_histories, @user)
   end
 
   # POST /v1/emotions
@@ -228,15 +252,36 @@ private
     end
   end
 
+  def feed_emotion_hug_to_follower
+    followers = Follower.where(followee_id: @user.id)
+    for follower in followers do
+      HugFeed.create(follower_id: follower.follower_id, emotion_id: @emotion.id, hugger_id: @user.id)
+    end
+  end
+
   def unfeed_emotion_to_follower
     followers = Follower.where(followee_id: @user.id)
     for follower in followers do
       feeds = Feed.where(
         follower_id: follower.follower_id,
-         emotion_id: @emotion.id
+        emotion_id: @emotion.id
       )
       for feed in feeds do
         feed.destroy
+      end
+    end
+  end
+
+  def unfeed_emotion_unhug_to_follower
+    followers = Follower.where(followee_id: @user.id)
+    for follower in followers do
+      hug_feeds = HugFeed.where(
+        follower_id: follower.follower_id,
+        emotion_id: @emotion.id,
+        hugger_id: @user.id
+      )
+      for hug_feed in hug_feeds do
+        hug_feed.destroy
       end
     end
   end
