@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_17_014601) do
+ActiveRecord::Schema.define(version: 2020_01_21_015201) do
 
   create_table "emotion_files", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "emotion_id"
@@ -106,6 +106,18 @@ ActiveRecord::Schema.define(version: 2020_01_17_014601) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_homes_on_user_id"
+  end
+
+  create_table "hug_feeds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "follower_id", null: false
+    t.bigint "emotion_id", null: false
+    t.bigint "hugger_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["emotion_id"], name: "index_hug_feeds_on_emotion_id"
+    t.index ["follower_id", "emotion_id", "hugger_id"], name: "index_hug_feeds_on_follower_id_and_emotion_id_and_hugger_id", unique: true
+    t.index ["follower_id"], name: "index_hug_feeds_on_follower_id"
+    t.index ["hugger_id"], name: "index_hug_feeds_on_hugger_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|

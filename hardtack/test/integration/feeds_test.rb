@@ -2,7 +2,7 @@ require 'test_helper'
 require 'json'
 require 'login'
  
-class FeedTest < ActionDispatch::IntegrationTest
+class FeedsTest < ActionDispatch::IntegrationTest
   setup do
     @user_1 = users(:user_one)
     @user_3 = users(:user_3)
