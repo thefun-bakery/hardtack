@@ -31,4 +31,31 @@ class V1::FollowersControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 204
   end
+
+  test "should show my follower list" do
+    get v1_followers_url(page: 0, howmany: 10),
+      headers: { Authorization: "Bearer #{@hardtack_token_1}" },
+      as: :json
+    assert_response :success
+    json_response = JSON.parse(@response.body)
+    assert_equal(2, json_response.length)
+  end
+
+  test "should show my followee list" do
+    get v1_followers_followees_url(page: 0, howmany: 10),
+      headers: { Authorization: "Bearer #{@hardtack_token_3}" },
+      as: :json
+    assert_response :success
+    json_response = JSON.parse(@response.body)
+    assert_equal(2, json_response.length)
+  end
+
+  test "should show my followee list - empty list" do
+    get v1_followers_followees_url(page: 0, howmany: 10),
+      headers: { Authorization: "Bearer #{@hardtack_token_1}" },
+      as: :json
+    assert_response :success
+    json_response = JSON.parse(@response.body)
+    assert_equal(0, json_response.length)
+  end
 end

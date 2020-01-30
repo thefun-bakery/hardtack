@@ -1,5 +1,6 @@
 require 'hardtack_file_helper'
 require 'json'
+require 'string_util'
 
 module ApiResponse
   def self.home(val_home)
@@ -94,19 +95,24 @@ module ApiResponse
   end
 
 
-private
-
   def self.user_info(user)
     return {} if user.nil?
+    user_profile_filename = user.profile_image_filename
+    profile_image_url = nil
+    profile_image_url = HardtackFileHelper.get_download_url(user_profile_filename) \
+       if not StringUtil.blank?(user_profile_filename)
 
     {
       id: user.id,
       nickname: user.nickname,
+      profile_image_url: profile_image_url,
       home_id: user.home.id,
       home_name: user.home.name,
       home_desc: user.home.desc
     }
   end
+
+private
 
   def self.load_emotion_map
     # TODO emotion mapping을 매번 파일에서 읽고 있는데, 이건 별도로 분리하자

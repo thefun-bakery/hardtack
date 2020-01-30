@@ -3,6 +3,7 @@ require_relative '../config/environment'
 require 'rails/test_help'
 
 require_relative '../lib/encryption'
+require_relative '../lib/string_util'
 require_relative '../lib/login/hardtack_auth'
 
 class ActiveSupport::TestCase

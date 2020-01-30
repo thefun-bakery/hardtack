@@ -27,7 +27,8 @@ Rails.application.routes.draw do
     get   'files/prepare-upload', to: 'files#prepare_upload'
     resources :files, only: [:show], param: :filename
 
-    resources :followers, only: [:create, :show, :destroy]
+    get   'followers/followees', to: 'followers#followees'
+    resources :followers, only: [:index, :create, :show, :destroy]
 
     resources :feeds, only: [:index, :show, :destroy]
 
