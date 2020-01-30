@@ -78,8 +78,10 @@ module ApiResponse
   end
 
   def self.main(val_main, user)
+    main_user = val_main.home.user
     {
-      user: self.main_user_info(val_main.home.user, user),
+      user: self.main_user_info(main_user, user),
+      is_owner: main_user.id == user.id ? true : false,
       home: {
         id: val_main.home.id,
         name: val_main.home.name,
@@ -94,7 +96,7 @@ module ApiResponse
 
   def self.main_user_info(main_user, user)
     main_user_info = self.user_info(main_user)
-    main_user_info[:is_owner] = main_user.id == user.id ? true : false
+
     follow_info = Follower.find_by_followee_id_and_follower_id(main_user.id, user.id)
     main_user_info[:is_friend] = follow_info ? true : false
 
