@@ -1,4 +1,4 @@
-require 'encryption'
+require 'test_helper'
 
 class EncryptionTest < ActiveSupport::TestCase
   test "encrypt decrypt" do
