@@ -19,7 +19,7 @@ class V1::MainControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     json_response = JSON.parse(@response.body)
-    assert_equal(true, json_response['user']['is_owner'])
+    assert_equal(true, json_response['is_owner'])
     assert_equal(false, json_response['user']['is_friend'])
   end
 
@@ -30,7 +30,7 @@ class V1::MainControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     json_response = JSON.parse(@response.body)
-    assert_equal(true, json_response['user']['is_owner'])
+    assert_equal(true, json_response['is_owner'])
     assert_equal(false, json_response['user']['is_friend'])
   end
 
@@ -41,7 +41,7 @@ class V1::MainControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     json_response = JSON.parse(@response.body)
-    assert_equal(false, json_response['user']['is_owner'])
+    assert_equal(false, json_response['is_owner'])
     assert_equal(false, json_response['user']['is_friend'])
   end
 
@@ -53,7 +53,7 @@ class V1::MainControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     json_response = JSON.parse(@response.body)
-    assert_equal(false, json_response['user']['is_owner'])
+    assert_equal(false, json_response['is_owner'])
     assert_equal(true, json_response['user']['is_friend'])
   end
 
